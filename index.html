@@ -125,6 +125,17 @@ for A in range(0, 300):
     if k==300*300:
         print(A)`
             },
+        {
+title: "rekurs",
+            code: `# Сама функция
+def F(n):
+    if n==1: return 1
+    if n%2==0: return n+F(n-1)
+    if n>1 and n%2!=0: return 3*F(n-2)
+    
+# Основная часть программы
+print(F(25))`
+        },
             {
                 title: "Example Two",
                 code: `#for pydroid
