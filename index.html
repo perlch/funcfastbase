@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>func fast base</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Consolas', monospace;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .card {
+            background: #161616;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            height: fit-content;
+        }
+        .card:hover { border-color: #2ecc71; }
+        .card-header {
+            padding: 15px;
+            background: #1f1f1f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-title { color: #2ecc71; font-weight: bold; }
+        .copy-btn {
+            background: transparent;
+            border: 1px solid #2ecc71;
+            color: #2ecc71;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .copy-btn:hover { background: #2ecc71; color: #000; }
+        .code-wrapper {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background: #0d0d0d;
+        }
+        .card.open .code-wrapper { max-height: 2000px; }
+        pre {
+            margin: 0;
+            padding: 15px;
+            color: #f1f1f1;
+            font-size: 13px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid" id="card-container"></div>
+
+    <script>
+        const codeCards = [
+            {
+                title: "Example One",
+                code: `console.log("First card");
+const x = 10;`
+            },
+            {
+                title: "Example Two",
+                code: `#for pydroid
+from turtle import *
+
+
+tracer(0)
+scale = 10
+#hideturtle()
+
+left(90)
+for i in range(5):
+    forward(35*scale)
+    right(90)
+    forward(24*scale)
+    right(90)
+    
+up()
+right(90)
+forward(7*scale)
+right(90)
+forward(5*scale)
+down()
+
+for i in range(101):
+    right(90)
+    forward(20*scale)
+    right(90)
+    forward(36*scale)
+
+update() 
+up()
+shape('square') 
+shapesize(0.1,0.1) 
+color('green')
+tracer(100, 0) 
+for x in range(-10, 40): 
+    for y in range(-10, 40):
+        goto(x * scale, y * scale)
+        stamp()
+update()
+done()`
+            },
+            {
+                title: "Multi Line Test",
+                code: `def count_programs(current, target):
+   #для исключений 
+    if current == 10: 
+        return 0 
+    if current == target: 
+        return 1 
+    if current > target: 
+        return 0 
+    count = 0 
+    # +1 
+    count += count_programs(current + 1, target) 
+    # *2 
+    count += count_programs(current * 2, target) 
+    # +5 
+    count += count_programs(current + 5, target) 
+    return count 
+print(count_programs(1,8)*count_programs(8,16)) 
+# -> 45 !`
+            }
+        ];
+
+        const container = document.getElementById('card-container');
+
+        function render() {
+            container.innerHTML = '';
+            codeCards.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                const header = document.createElement('div');
+                header.className = 'card-header';
+                
+                const title = document.createElement('span');
+                title.className = 'card-title';
+                title.textContent = item.title;
+                
+                const btn = document.createElement('button');
+                btn.className = 'copy-btn';
+                btn.textContent = 'Copy';
+                
+                header.appendChild(title);
+                header.appendChild(btn);
+                
+                const wrapper = document.createElement('div');
+                wrapper.className = 'code-wrapper';
+                
+                const pre = document.createElement('pre');
+                const code = document.createElement('code');
+                code.textContent = item.code;
+                
+                pre.appendChild(code);
+                wrapper.appendChild(pre);
+                
+                card.appendChild(header);
+                card.appendChild(wrapper);
+
+                card.addEventListener('click', (e) => {
+                    if (e.target !== btn) {
+                        card.classList.toggle('open');
+                    }
+                });
+
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    navigator.clipboard.writeText(item.code).then(() => {
+                        const originalText = btn.textContent;
+                        btn.textContent = 'Copied!';
+                        setTimeout(() => btn.textContent = originalText, 1500);
+                    });
+                });
+
+                container.appendChild(card);
+            });
+        }
+
+        render();
+    </script>
+</body>
+</html>
+  
