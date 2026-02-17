@@ -84,6 +84,23 @@
         n //= base
     return res`
             },
+            {
+                title: "18p",
+                code: `for A in range(1, 1000):
+    z = 0
+    for x in range(1, 1000):
+        for y in range(1, 1000):
+            f = ((x + 3*y) < A) or (y > 400) or (x > 56)
+            if f == False:
+                z += 1
+                break
+        if z > 0:
+            break
+    if z == 0:
+        print(A)
+        break
+        `
+            },
         { title: "turtle?",
          code: `from turtle import *
 tracer(0)
