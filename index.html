@@ -84,6 +84,35 @@
         n //= base
     return res`
             },
+            {title: "kinda 8",
+            code: `from itertools import product
+
+# Генерируем все 5-буквенные слова из букв А, К, Р, У
+# (в алфавитном порядке)
+words = [''.join(p) for p in product('АКРУ', repeat=5)]
+
+# Считаем, например, слова, начинающиеся с А
+count = 0
+for word in words:
+    if word.startswith('А'):
+        count += 1
+print(count)
+`},
+            {
+                title: "full17 example",
+                codd: `f = open(r"D:\School\1.txt")
+a = [int(x) for x in f]
+count = 0
+min_sum = 10**10
+for i in range(len(a) - 3):
+    s = a[i] + a[i+1] + a[i+2] + a[i+3]
+    if s % 4 == 0 and a[i] == max(a[i], a[i+1], a[i+2], a[i+3]):
+        count += 1
+        if s < min_sum:
+            min_sum = s
+print(count, min_sum)
+#-> 10 220 `)
+            },
             {
                 title: "rekurs2",
                 code: `f = [0] * 2025
