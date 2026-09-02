@@ -70,7 +70,8 @@
 
     <div class="grid" id="card-container"></div>
 
-    <script>
+   
+<script>
         const codeCards = [
             {
                 title: "to base",
@@ -277,7 +278,315 @@ done()`
     return count 
 print(count_programs(1,8)*count_programs(8,16)) 
 # -> 45 !`
-            }
+            },
+            {
+                title: "1",
+                code: `# 1
+print('x y z w F')
+for x in range(2):
+    for y in range(2):
+        for z in range(2):
+            for w in range(2):
+                F = ...  # сюда вставляем выражение из условия
+                if F == 0:  # меняем на F == 1, если нужны строки с единицей
+                    print(x, y, z, w, int(F))`
+            },
+            {
+                title: "2",
+                code: `# 2
+def to_base(x, base):
+    s = ''
+    while x > 0:
+        s = str(x % base) + s
+        x //= base
+    return s`
+            },
+            {
+                title: "3",
+                code: `# 3
+def to_base(x, base):
+    s = ''
+    while x > 0:
+        s = str(x % base) + s
+        x //= base
+    return s
+
+for n in range(1, 1000):
+    s = to_base(n, 3)  # меняем 3 на нужную систему счисления
+    if n % 3 == 0:
+        s = s + s[-2:]  # действие из условия
+    else:
+        s = s + to_base((n % 3) * 5, 3)  # действие из условия
+    r = int(s, 3)
+    if r >= 86:
+        print(n, r)
+        break`
+            },
+            {
+                title: "4",
+                code: `# 4
+from turtle import *
+tracer(0)
+screensize(2000, 2000)
+k = 20
+# построение фигуры
+for i in range(...):
+    forward(... * k)
+    right(90)
+    forward(... * k)
+    right(90)
+penup()
+# нанесение точек
+for x in range(-50, 50):
+    for y in range(-50, 50):
+        goto(x * k, y * k)
+        dot(3)
+update()
+done()`
+            },
+            {
+                title: "5",
+                code: `# 5
+from itertools import *
+count = 0
+number = 0
+for x in product(sorted('АБВГ'), repeat=5):
+    s = ''.join(x)
+    number += 1
+    if условие:
+        count += 1
+print(count)`
+            },
+            {
+                title: "6",
+                code: `# 6
+from itertools import *
+count = 0
+for x in permutations('0123456789', r=5):
+    s = ''.join(x)
+    if s[0] != '0':
+        n = int(s)
+        if условие:
+            count += 1
+print(count)`
+            },
+            {
+                title: "7",
+                code: `# 7
+for x in range(10):
+    a = '98' + str(x) + '2'
+    b = '73' + str(x) + '6'
+    value = int(a, 18) + int(b, 12)
+    if value % 13 == 0:
+        print(x, value // 13)`
+            },
+            {
+                title: "8",
+                code: `# 8
+def f(x, A):
+    return ...  # условие из задачи
+
+for A in range(1, 1000):
+    if all(f(x, A) for x in range(0, 1000)):
+        print(A)`
+            },
+            {
+                title: "9",
+                code: `# 9
+def f(x, y, A):
+    return ...  # условие из задачи
+
+for A in range(1, 1000):
+    if all(f(x, y, A) for x in range(0, 1000) for y in range(0, 1000)):
+        print(A)`
+            },
+            {
+                title: "10",
+                code: `# 10
+P = range(45, 61)
+Q = range(52, 58)
+A = []
+
+def f(x):
+    return ...
+
+for x in range(0, 100):
+    if условие_нарушается:
+        A.append(x)
+print(A)
+print(len(A))`
+            },
+            {
+                title: "11",
+                code: `# 11
+import sys
+sys.setrecursionlimit(10000)
+
+def F(n):
+    if n == 1:
+        return 1
+    if n > 1:
+        return n * F(n - 1)
+
+print(F(...))`
+            },
+            {
+                title: "12",
+                code: `# 12
+def F(n):
+    if n >= 654:
+        return 1
+    if n < 654:
+        return F(n + 2) + 7
+
+def G(n):
+    if n < 10:
+        return n
+    if n >= 10:
+        return G(n - 2) + 5
+
+print(F(15) - G(30))`
+            },
+            {
+                title: "13",
+                code: `# 13
+a = [int(x) for x in open('17.txt')]
+result = []
+for i in range(len(a) - 1):
+    x = a[i]
+    y = a[i + 1]
+    if условие:
+        result.append(...)  # что нужно найти: сумму, разность, максимум и т.д.
+print(len(result), max(result))`
+            },
+            {
+                title: "14",
+                code: `# 14
+a = [int(x) for x in open('17.txt')]
+result = []
+for i in range(len(a) - 2):
+    x = a[i]
+    y = a[i + 1]
+    z = a[i + 2]
+    if условие:
+        result.append(x + y + z)
+print(len(result), max(result))`
+            },
+            {
+                title: "15",
+                code: `# 15
+def f(s, m):
+    if s >= 86:
+        return m % 2 == 0
+    if m == 0:
+        return False
+    moves = [
+        f(s + 3, m - 1),
+        f(s * 3, m - 1)
+    ]
+    if (m - 1) % 2 == 0:
+        return any(moves)
+    else:
+        return all(moves)
+
+print('19:', [s for s in range(1, 86) if f(s, 2)])
+print('20:', [s for s in range(1, 86) if not f(s, 1) and f(s, 3)])
+print('21:', [s for s in range(1, 86) if not f(s, 2) and f(s, 4)])`
+            },
+            {
+                title: "16",
+                code: `# 16
+def f(a, b, m):
+    if a + b >= 181:
+        return m % 2 == 0
+    if m == 0:
+        return False
+    moves = [
+        f(a + 1, b, m - 1),
+        f(a, b + 1, m - 1),
+        f(a * 4, b, m - 1),
+        f(a, b * 4, m - 1)
+    ]
+    if (m - 1) % 2 == 0:
+        return any(moves)
+    else:
+        return all(moves)
+
+print('19:', [s for s in range(1, 177) if f(4, s, 2)])
+print('20:', [s for s in range(1, 177) if not f(4, s, 1) and f(4, s, 3)])
+print('21:', [s for s in range(1, 177) if not f(4, s, 2) and f(4, s, 4)])`
+            },
+            {
+                title: "17",
+                code: `# 17
+def f(x, y):
+    if x == y:
+        return 1
+    if x > y:
+        return 0
+    if x == 20:  # запретная точка, если она есть в условии
+        return 0
+    return f(x + 1, y) + f(x + 2, y) + f(x * 3, y)
+
+print(f(4, 10) * f(10, 22))`
+            },
+            {
+                title: "18",
+                code: `# 18
+def divs(x):
+    d = set()
+    for i in range(2, int(x ** 0.5) + 1):
+        if x % i == 0:
+            d.add(i)
+            d.add(x // i)
+    return sorted(d)
+
+count = 0
+for x in range(900001, 1000000):
+    d = divs(x)
+    if len(d) > 0:
+        M = min(d) + max(d)
+    else:
+        M = 0
+    if M % 10 == 8:
+        print(x, M)
+        count += 1
+    if count == 5:
+        break`
+            },
+            {
+                title: "19",
+                code: `# 19
+def dist(p1, p2):
+    x1, y1 = p1
+    x2, y2 = p2
+    return ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5
+
+def center(cluster):
+    best = []
+    for p in cluster:
+        total = sum(dist(p, p1) for p1 in cluster)
+        best.append([total, p])
+    return min(best)[1]
+
+f = open('27.txt')
+clusters = [[] for i in range(3)]
+for s in f:
+    x, y = [float(c) for c in s.split()]
+    if условие_аномалии:
+        continue
+    if условие_первого_кластера:
+        clusters[0].append([x, y])
+    elif условие_второго_кластера:
+        clusters[1].append([x, y])
+    else:
+        clusters[2].append([x, y])
+
+centers = [center(cluster) for cluster in clusters]
+px = sum(x for x, y in centers) / len(centers)
+py = sum(y for x, y in centers) / len(centers)
+print(int(px * 10000), int(py * 10000))`
+            },
         ];
 
         const container = document.getElementById('card-container');
@@ -336,6 +645,7 @@ print(count_programs(1,8)*count_programs(8,16))
 
         render();
     </script>
+
 </body>
 </html>
   
